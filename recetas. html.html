@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>App de Recetas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f8f9fa;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      background: #28a745;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background: #218838;
+    }
+
+    .receta {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+      max-width: 600px;
+      margin: 10px auto;
+    }
+
+    .receta h3 {
+      margin-bottom: 5px;
+    }
+
+    .receta button {
+      background: #dc3545;
+      margin-top: 10px;
+    }
+
+    .receta button:hover {
+      background: #c82333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📘 Mis Recetas</h1>
+
+  <form id="form-receta">
+    <input type="text" id="nombre" placeholder="Nombre de la receta" required>
+    <textarea id="ingredientes" placeholder="Ingredientes (separados por comas)" required></textarea>
+    <textarea id="pasos" placeholder="Pasos de la receta" required></textarea>
+    <button type="submit">Agregar Receta</button>
+  </form>
+
+  <div id="lista-recetas"></div>
+
+  <script>
+    const form = document.getElementById('form-receta');
+    const lista = document.getElementById('lista-recetas');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const nombre = document.getElementById('nombre').value.trim();
+      const ingredientes = document.getElementById('ingredientes').value.trim();
+      const pasos = document.getElementById('pasos').value.trim();
+
+      if (!nombre || !ingredientes || !pasos) return;
+
+      const receta = document.createElement('div');
+      receta.classList.add('receta');
+      receta.innerHTML = `
+        <h3>${nombre}</h3>
+        <p><strong>Ingredientes:</strong> ${ingredientes}</p>
+        <p><strong>Pasos:</strong> ${pasos}</p>
+        <button onclick="this.parentElement.remove()">Eliminar</button>
+      `;
+
+      lista.appendChild(receta);
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
